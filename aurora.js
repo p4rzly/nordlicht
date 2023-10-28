@@ -44,7 +44,7 @@ function s(x, cx, sp) {
     let result = 1;
 
     for (let i = 0; i < cx; i++) {
-        result += (Math.sin(0.8 / cx * i * (x * 0.3 + (1 / cx * i * -3 * (-1 * i)) * progress * sp)) + 1) / 2;
+        result += (Math.sin(0.8 / cx * i * (x * 0.4 + (1 / cx * i * -3 * (-1 * i)) * progress * sp)) + 1) / 2;
     }
 
     result += (Math.sin(0.05 * x + progress * sp * 2) + 1) * 5;
