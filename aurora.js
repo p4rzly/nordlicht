@@ -19,7 +19,7 @@ let fps = 40;
 
 
 
-/*    ALL GLOBAL VARIABLES   */
+/*    ALL GLOBAL VARIABLEZ   */
 
 const canvas = document.createElement("canvas");
 const aurora = document.getElementById("aurora");
