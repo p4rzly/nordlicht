@@ -1,16 +1,18 @@
-html {
+body {
     background-color: #02040c;
     margin: 0;
     padding: 0;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
 }
 
 
-#aurora {
-    width: 100vw;
-    height: 100vh;
-    /* border: solid 2px rgba(255,255,255,0.4); */
-    /* filter: blur(11px); */
+#container {
+    width: 90vw;
+    height: 90vh;
+    border: 1px grey solid;
+    align-self: center;
 }

@@ -14,7 +14,7 @@ let blur = 12;
 let perspective = 0;
 let focalLength = 35;
 
-let fps = 40;
+let fps = 60;
 
 
 
@@ -38,6 +38,14 @@ let lastTimestamp = 0;
 
 
 
+function s(height, complexity, speed) {
+
+    return 1
+}
+
+
+
+/*
 function s(x, cx, sp) {
 
     sp *= 0.0001
@@ -52,6 +60,8 @@ function s(x, cx, sp) {
 
     return result / (cx + 3)
 }
+*/
+
 
 
 
@@ -130,9 +140,9 @@ function render(timestamp) {
 
         for (let i = 0; i < spikeCount; i++) {
 
-            let y = height - s(i, 12, 4) * 100 -100;
+            let y = 50;
 
-            let spikeHeight = (s(i*i, 2, 30) * 50 + s(i,10, 15) * 250) + ((i - spikeCount * 0.5) / (spikeCount * 0.5)) * rotation * -3;
+            let spikeHeight = 2;
 
 
             // Opacity modifiers
@@ -212,7 +222,7 @@ const PARAMS = {
     Feather: 15,
     Perspective: 0,
     Rotation: 0,
-    Blur: 12,
+    Blur: 0,
     theme: 'dark',
     Color: {r: 32, g: 223, b: 133}
   };
