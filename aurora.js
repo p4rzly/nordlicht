@@ -14,13 +14,12 @@ let blur = 12;
 let perspective = 0;
 let focalLength = 35;
 
-let fps = 60;
+let fps = 40;
 
 
 
 
-
-/*    ALL GLOBAL VARIABLES  */
+/*    GLOBAL VARIABLES    */
 
 const canvas = document.createElement("canvas");
 const aurora = document.getElementById("aurora");
@@ -38,30 +37,20 @@ let lastTimestamp = 0;
 
 
 
-function s(height, complexity, speed) {
-
-    return 1
-}
-
-
-
-/*
 function s(x, cx, sp) {
 
-    sp *= 0.0001
+    sp *= 0.0003
     x = x + (perspective * x - perspective)*3;
     let result = 1;
 
     for (let i = 0; i < cx; i++) {
-        result += (Math.sin(0.8 / cx * i * (x * 0.4 + (1 / cx * i * -3 * (-1 * i)) * progress * sp)) + 1) / 2;
+        result += (Math.sin(0.8 / cx * i * (x * 0.3 + (1 / cx * i * -3 * (-1 * i)) * progress * sp)) + 1) / 2;
     }
 
     result += (Math.sin(0.05 * x + progress * sp * 2) + 1) * 5;
 
     return result / (cx + 3)
 }
-*/
-
 
 
 
@@ -140,14 +129,14 @@ function render(timestamp) {
 
         for (let i = 0; i < spikeCount; i++) {
 
-            let y = 50;
+            let y = height - s(i, 12, 6) * 100 -100;
 
-            let spikeHeight = 2;
+            let spikeHeight = (s(i*i, 2, 30) * 50 + s(i,10, 5) * 250) + ((i - spikeCount * 0.5) / (spikeCount * 0.5)) * rotation * -3;
 
 
             // Opacity modifiers
             let opacity = Math.min(Math.max(((Math.sqrt(Math.pow(i - ((spikeCount - (spikeCount % 2)) / 2), 2)) * -1 + ((spikeCount - (spikeCount % 2 - 1)) / 2)) / (Math.round(spikeCount / 2) * feather / 100)), 0), 1);
-            opacity *= ((s(i*i, 10, 25) * 0.6)) * 0.3 + (s(i, 12, 16)-0.9)  * 0.5 + s(progress * 0.001, 12, 5) * 0.1;
+            opacity *= ((s(i*i, 10, 25) * 0.6)) * 0.3 + (s(i, 12, 6)-0.9)  * 0.5 + s(progress * 0.001, 12, 5) * 0.1;
             //opacity *= (( i / spikeCount ));
             opacity = Math.min(Math.max(opacity, 0), 1);
 
@@ -222,7 +211,7 @@ const PARAMS = {
     Feather: 15,
     Perspective: 0,
     Rotation: 0,
-    Blur: 0,
+    Blur: 12,
     theme: 'dark',
     Color: {r: 32, g: 223, b: 133}
   };

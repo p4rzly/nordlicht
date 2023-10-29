@@ -39,7 +39,7 @@ class Nordlicht {
 
 
 
-	normalizeRetinaScreens() {
+	static normalizeRetinaScreens() {
 
 		// Resizing for 2X resolution/Retina screens
 		const dpi = window.devicePixelRatio;
