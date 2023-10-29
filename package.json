@@ -1,0 +1,23 @@
+{
+  "name": "nordlicht",
+  "version": "1.0.0",
+  "description": "",
+  "main": "aurora.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/p4rzly/nordlicht.git"
+  },
+  "author": "p4rzly",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/p4rzly/nordlicht/issues"
+  },
+  "homepage": "https://github.com/p4rzly/nordlicht#readme",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
