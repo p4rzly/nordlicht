@@ -1,8 +1,6 @@
 
-import { createNoise2D } from './node_modules/simplex-noise';
 
-
-
+import { createNoise2D } from 'simplex-noise';
 
 
 
@@ -13,17 +11,15 @@ class Spike {
 
 	constructor(index) {
 		this.index = index;
-
-		this.noise = createNoise2D();
 	}
 
 
-	value (progress) {
+	value (progress, noise) {
 		const obj = {
-			x: index * 5,
-			y: this.noise(progress, 1) * 20 + 400,
+			x: this.index * 5,
+			y: noise(this.index / 80 + progress / 120, progress / 230) * 30 + 400,
 			width: 5,
-			height: 5,
+			height: 20,
 			color: "rgb(32,223,133)",
 			opacity: 1
 		}
@@ -44,16 +40,7 @@ class Spike {
 
 
 
-
-
-
-
-
-class Nordlicht {
-
-
-
-
+export default class Nordlicht {
 
 
 
@@ -77,6 +64,8 @@ class Nordlicht {
 
 
 		this.spikes = [];
+
+		this.noise = createNoise2D();
 
 		this.setupCanvas()
 
@@ -125,7 +114,7 @@ class Nordlicht {
 
 		this.spikes = [];
 
-		for (let i = 0; i < this.width / spikeWidth; i++) {
+		for (let i = 0; i < this.width / 5; i++) {
 			this.spikes[i] = new Spike(i);
 		}
 		
@@ -204,10 +193,10 @@ class Nordlicht {
 		
 
 		for (let i = 0; i < this.spikes.length; i++) {
-			const spike = this.spikes[i].value(progress);
+			const spike = this.spikes[i].value(this.progress, this.noise);
 
 			this.ctx.beginPath();
-				this.ctx.roundRect(spike.x, spike.y, spike.width, spike.x, 2);
+				this.ctx.roundRect(spike.x, spike.y, spike.width, spike.height, 2);
 				this.ctx.fillStyle = spike.color;
          	this.ctx.fill();
 
@@ -256,5 +245,8 @@ class Nordlicht {
 
 
 }
+
+
+
 
 
