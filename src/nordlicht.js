@@ -1,6 +1,10 @@
 
 
 import { createNoise2D } from 'simplex-noise';
+import { Pane } from 'tweakpane';
+
+
+
 
 
 
@@ -14,13 +18,13 @@ class Spike {
 	}
 
 
-	value (progress, noise) {
+	value (progress, noise, params) {
 		const obj = {
 			x: this.index * 5,
-			y: noise(this.index / 80 + progress / 120, progress / 230) * 30 + 400,
+			y: noise(this.index / 1000 * params.frequency + progress / 1000 * params.speed, progress / 1000 * params.variance) * params.size + 400,
 			width: 5,
 			height: 20,
-			color: "rgb(32,223,133)",
+			color: "rgb(" + params.color.r + "," + params.color.g + "," + params.color.b + ")",
 			opacity: 1
 		}
 
@@ -67,7 +71,41 @@ export default class Nordlicht {
 
 		this.noise = createNoise2D();
 
-		this.setupCanvas()
+		this.setupCanvas();
+
+
+
+
+
+
+		// Tweakpane for Dev
+
+
+		const pane = new Pane();
+
+
+
+		const PARAMS = {
+			frequency: 3,
+			speed: 3,
+			variance: 3,
+			size: 30,
+			theme: 'dark',
+			color: {r: 32, g: 223, b: 133}
+		};
+
+
+		pane.addBinding(PARAMS, 'frequency', {min: 0.1, max: 15, step: 0.1});
+		pane.addBinding(PARAMS, 'speed', {min: 0.1, max: 15, step: 0.1});
+		pane.addBinding(PARAMS, 'variance', {min: 0.1, max: 15, step: 0.1});
+		pane.addBinding(PARAMS, 'size', {min: 1, max: 50, step: 1});
+		pane.addBinding(PARAMS, 'color');
+
+		pane.on('change', (ev) => {
+  			this.params = PARAMS;
+		});
+
+		this.params = PARAMS;
 
 	}
 
@@ -84,12 +122,12 @@ export default class Nordlicht {
 
 
     	// Setting the size of the canvas
-    	this.canvas.width = this.width * dpi;
-    	this.canvas.height = this.height * dpi;
+		this.canvas.width = this.width * dpi;
+		this.canvas.height = this.height * dpi;
 
 
     	// Normalizing the canvas to use device pixels and not the 2x retina pixels for the coordination system
-    	this.ctx.scale(dpi, dpi);
+		this.ctx.scale(dpi, dpi);
 
 	}
 
@@ -193,12 +231,12 @@ export default class Nordlicht {
 		
 
 		for (let i = 0; i < this.spikes.length; i++) {
-			const spike = this.spikes[i].value(this.progress, this.noise);
+			const spike = this.spikes[i].value(this.progress, this.noise, this.params);
 
 			this.ctx.beginPath();
-				this.ctx.roundRect(spike.x, spike.y, spike.width, spike.height, 2);
-				this.ctx.fillStyle = spike.color;
-         	this.ctx.fill();
+			this.ctx.roundRect(spike.x, spike.y, spike.width, spike.height, 2);
+			this.ctx.fillStyle = spike.color;
+			this.ctx.fill();
 
 		}
 
@@ -245,6 +283,23 @@ export default class Nordlicht {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

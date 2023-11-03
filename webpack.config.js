@@ -11,7 +11,7 @@ module.exports = {
 
   entry: {
 
-    Nordlicht: path.resolve(__dirname, '_src/nordlicht.js')
+    Nordlicht: path.resolve(__dirname, 'src/nordlicht.js')
 
   },
 
@@ -21,7 +21,7 @@ module.exports = {
 
     filename: 'nordlicht.js',
 
-    path: path.resolve(__dirname, '_dist'),
+    path: path.resolve(__dirname, './dist'),
 
     library: {
       name: "Nordlicht",
@@ -34,9 +34,10 @@ module.exports = {
 
   devServer: {
     port: 8080,
-    static: path.resolve(__dirname, '_dist'),
+    static: path.resolve(__dirname, './dist'),
     open: true,
-    hot: true
+    hot: true,
+    historyApiFallback: true
   },
 
   mode: 'development'
